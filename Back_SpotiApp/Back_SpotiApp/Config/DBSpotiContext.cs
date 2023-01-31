@@ -9,7 +9,7 @@ namespace Back_SpotiApp.Config
             { }
         public DbSet<Artista> Artistas { get; set; }
         public DbSet<Album> Albums{ get; set; }
-        public DbSet<Cancion> Canciones { get; set; }
+        public DbSet<Cancion> Cancion { get; set; }
 
 
     }

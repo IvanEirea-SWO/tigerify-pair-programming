@@ -19,7 +19,7 @@ namespace Back_SpotiApp.Controllers
             return await _context.Albums.ToListAsync();
         }
 
-        [HttpGet("albumsave")]
+        [HttpPost("albumsave")]
         public async Task<ActionResult> Post(Album album) 
         {
             _context.Albums.Add(album);
