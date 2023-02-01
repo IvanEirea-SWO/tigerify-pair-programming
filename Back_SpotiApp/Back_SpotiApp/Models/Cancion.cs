@@ -6,6 +6,7 @@
         public String Nombre { get; set; }
         public int Duracion { get; set; }
         public Album Album { get; set; }
+        public Genero Genero { get; set; }
 
     }
 }

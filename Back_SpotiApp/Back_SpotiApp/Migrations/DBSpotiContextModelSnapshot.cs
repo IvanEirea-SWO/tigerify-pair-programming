@@ -76,6 +76,9 @@ namespace BackSpotiApp.Migrations
                     b.Property<int>("Duracion")
                         .HasColumnType("int");
 
+                    b.Property<int?>("GeneroId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
@@ -83,13 +86,31 @@ namespace BackSpotiApp.Migrations
 
                     b.HasIndex("AlbumId");
 
-                    b.ToTable("Cancion");
+                    b.HasIndex("GeneroId");
+
+                    b.ToTable("Canciones");
+                });
+
+            modelBuilder.Entity("Back_SpotiApp.Models.Genero", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Generos");
                 });
 
             modelBuilder.Entity("Back_SpotiApp.Models.Album", b =>
                 {
                     b.HasOne("Back_SpotiApp.Models.Artista", "Artista")
-                        .WithMany("Albums")
+                        .WithMany()
                         .HasForeignKey("ArtistaId");
 
                     b.Navigation("Artista");
@@ -98,20 +119,16 @@ namespace BackSpotiApp.Migrations
             modelBuilder.Entity("Back_SpotiApp.Models.Cancion", b =>
                 {
                     b.HasOne("Back_SpotiApp.Models.Album", "Album")
-                        .WithMany("Canciones")
+                        .WithMany()
                         .HasForeignKey("AlbumId");
 
+                    b.HasOne("Back_SpotiApp.Models.Genero", "Genero")
+                        .WithMany()
+                        .HasForeignKey("GeneroId");
+
                     b.Navigation("Album");
-                });
 
-            modelBuilder.Entity("Back_SpotiApp.Models.Album", b =>
-                {
-                    b.Navigation("Canciones");
-                });
-
-            modelBuilder.Entity("Back_SpotiApp.Models.Artista", b =>
-                {
-                    b.Navigation("Albums");
+                    b.Navigation("Genero");
                 });
 #pragma warning restore 612, 618
         }

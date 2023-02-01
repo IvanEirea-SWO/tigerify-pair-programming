@@ -5,7 +5,7 @@
 namespace BackSpotiApp.Migrations
 {
     /// <inheritdoc />
-    public partial class Spoti : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,6 +22,19 @@ namespace BackSpotiApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Artistas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Generos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Generos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,22 +57,28 @@ namespace BackSpotiApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cancion",
+                name: "Canciones",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Duracion = table.Column<int>(type: "int", nullable: false),
-                    AlbumId = table.Column<int>(type: "int", nullable: true)
+                    AlbumId = table.Column<int>(type: "int", nullable: true),
+                    GeneroId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cancion", x => x.Id);
+                    table.PrimaryKey("PK_Canciones", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cancion_Albums_AlbumId",
+                        name: "FK_Canciones_Albums_AlbumId",
                         column: x => x.AlbumId,
                         principalTable: "Albums",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Canciones_Generos_GeneroId",
+                        column: x => x.GeneroId,
+                        principalTable: "Generos",
                         principalColumn: "Id");
                 });
 
@@ -69,19 +88,27 @@ namespace BackSpotiApp.Migrations
                 column: "ArtistaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cancion_AlbumId",
-                table: "Cancion",
+                name: "IX_Canciones_AlbumId",
+                table: "Canciones",
                 column: "AlbumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Canciones_GeneroId",
+                table: "Canciones",
+                column: "GeneroId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Cancion");
+                name: "Canciones");
 
             migrationBuilder.DropTable(
                 name: "Albums");
+
+            migrationBuilder.DropTable(
+                name: "Generos");
 
             migrationBuilder.DropTable(
                 name: "Artistas");

@@ -17,13 +17,13 @@ namespace Back_SpotiApp.Controllers
         [HttpGet("cancionlist")]
         public async Task<ActionResult<List<Cancion>>> Get()
         {
-            return await _context.Cancion.ToListAsync();
+            return await _context.Canciones.ToListAsync();
         }
 
         [HttpPost("cancionsave")]
         public async Task<ActionResult> Post(Cancion cancion)
         {
-            _context.Cancion.Add(cancion);
+            _context.Canciones.Add(cancion);
             await _context.SaveChangesAsync();
             return Ok(cancion);
         }
