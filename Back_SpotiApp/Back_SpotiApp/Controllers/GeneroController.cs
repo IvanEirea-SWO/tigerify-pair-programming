@@ -35,7 +35,7 @@ namespace Back_SpotiApp.Controllers
                 return Ok(genero);
             }
         }
-        [HttpGet("{id}")]
+        [HttpGet("buscar-id/{id}")]
         public async Task<ActionResult<Genero>> GetGenero(int id)
         {
             var generoExist = await _context.Generos.AnyAsync(x => x.Id == id);
@@ -44,6 +44,17 @@ namespace Back_SpotiApp.Controllers
                 return BadRequest($"La cancion con id {id} no existe");
             }
             return await _context.Generos.Include(x => x.canciones).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        [HttpGet("buscar-nombre/{name}")]
+        public async Task<ActionResult<Genero>> GetGenero(String name)
+        {
+            var generoExist = await _context.Generos.AnyAsync(x => x.Name == name);
+            if (!generoExist)
+            {
+                return BadRequest($"La cancion con nombre {name} no existe");
+            }
+            return await _context.Generos.Include(x => x.canciones).FirstOrDefaultAsync(x => x.Name == name);
         }
     }
 }

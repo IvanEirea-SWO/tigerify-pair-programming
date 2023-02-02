@@ -24,16 +24,12 @@ namespace Back_SpotiApp.Controllers
         [HttpPost("save")]
         public async Task<ActionResult> Save([FromBody] Cancion cancion)
         {
-            if (cancion == null)
-            {
-                return BadRequest("Los campos no pueden estar vacios");
-            }
-            else
-            {
-                _context.Canciones.Add(cancion);
+            
+
+                _context.Add(cancion);
                 await _context.SaveChangesAsync();
                 return Ok(cancion);
-            }
+
         }
 
         [HttpGet("{id}")]

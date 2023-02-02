@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackSpotiApp.Migrations
 {
     [DbContext(typeof(DBSpotiContext))]
-    [Migration("20230202113510_spoti")]
+    [Migration("20230202122426_spoti")]
     partial class spoti
     {
         /// <inheritdoc />
@@ -25,46 +25,6 @@ namespace BackSpotiApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Back_SpotiApp.Models.Album", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("ArtistaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArtistaId");
-
-                    b.ToTable("Albums");
-                });
-
-            modelBuilder.Entity("Back_SpotiApp.Models.Artista", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Genero")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Artistas");
-                });
-
             modelBuilder.Entity("Back_SpotiApp.Models.Cancion", b =>
                 {
                     b.Property<int>("Id")
@@ -72,9 +32,6 @@ namespace BackSpotiApp.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AlbumId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Duracion")
                         .HasColumnType("int");
@@ -85,9 +42,10 @@ namespace BackSpotiApp.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("autor")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("AlbumId");
+                    b.HasKey("Id");
 
                     b.HasIndex("GeneroId");
 
@@ -110,33 +68,18 @@ namespace BackSpotiApp.Migrations
                     b.ToTable("Generos");
                 });
 
-            modelBuilder.Entity("Back_SpotiApp.Models.Album", b =>
-                {
-                    b.HasOne("Back_SpotiApp.Models.Artista", "Artista")
-                        .WithMany()
-                        .HasForeignKey("ArtistaId");
-
-                    b.Navigation("Artista");
-                });
-
             modelBuilder.Entity("Back_SpotiApp.Models.Cancion", b =>
                 {
-                    b.HasOne("Back_SpotiApp.Models.Album", "Album")
-                        .WithMany("Canciones")
-                        .HasForeignKey("AlbumId");
-
                     b.HasOne("Back_SpotiApp.Models.Genero", "Genero")
-                        .WithMany()
+                        .WithMany("canciones")
                         .HasForeignKey("GeneroId");
-
-                    b.Navigation("Album");
 
                     b.Navigation("Genero");
                 });
 
-            modelBuilder.Entity("Back_SpotiApp.Models.Album", b =>
+            modelBuilder.Entity("Back_SpotiApp.Models.Genero", b =>
                 {
-                    b.Navigation("Canciones");
+                    b.Navigation("canciones");
                 });
 #pragma warning restore 612, 618
         }

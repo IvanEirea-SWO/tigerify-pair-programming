@@ -7,8 +7,6 @@ namespace Back_SpotiApp.Config
     {
         public DBSpotiContext(DbContextOptions<DBSpotiContext> options) : base(options)
             { }
-        public DbSet<Artista> Artistas { get; set; }
-        public DbSet<Album> Albums{ get; set; }
         public DbSet<Cancion> Canciones { get; set; }
 
         public DbSet<Genero> Generos { get; set; }
