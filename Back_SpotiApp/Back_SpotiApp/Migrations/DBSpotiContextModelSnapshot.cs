@@ -119,7 +119,7 @@ namespace BackSpotiApp.Migrations
             modelBuilder.Entity("Back_SpotiApp.Models.Cancion", b =>
                 {
                     b.HasOne("Back_SpotiApp.Models.Album", "Album")
-                        .WithMany()
+                        .WithMany("Canciones")
                         .HasForeignKey("AlbumId");
 
                     b.HasOne("Back_SpotiApp.Models.Genero", "Genero")
@@ -129,6 +129,11 @@ namespace BackSpotiApp.Migrations
                     b.Navigation("Album");
 
                     b.Navigation("Genero");
+                });
+
+            modelBuilder.Entity("Back_SpotiApp.Models.Album", b =>
+                {
+                    b.Navigation("Canciones");
                 });
 #pragma warning restore 612, 618
         }

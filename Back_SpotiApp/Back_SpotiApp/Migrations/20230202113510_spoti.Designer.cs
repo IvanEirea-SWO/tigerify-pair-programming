@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackSpotiApp.Migrations
 {
     [DbContext(typeof(DBSpotiContext))]
-    [Migration("20230201123500_initial")]
-    partial class initial
+    [Migration("20230202113510_spoti")]
+    partial class spoti
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,7 +122,7 @@ namespace BackSpotiApp.Migrations
             modelBuilder.Entity("Back_SpotiApp.Models.Cancion", b =>
                 {
                     b.HasOne("Back_SpotiApp.Models.Album", "Album")
-                        .WithMany()
+                        .WithMany("Canciones")
                         .HasForeignKey("AlbumId");
 
                     b.HasOne("Back_SpotiApp.Models.Genero", "Genero")
@@ -132,6 +132,11 @@ namespace BackSpotiApp.Migrations
                     b.Navigation("Album");
 
                     b.Navigation("Genero");
+                });
+
+            modelBuilder.Entity("Back_SpotiApp.Models.Album", b =>
+                {
+                    b.Navigation("Canciones");
                 });
 #pragma warning restore 612, 618
         }

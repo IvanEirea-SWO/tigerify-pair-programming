@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Back_SpotiApp.Controllers
 {
+    [Route("/api/album")]
     public class AlbumController : Controller
     {
         private readonly DBSpotiContext _context;
@@ -13,18 +14,25 @@ namespace Back_SpotiApp.Controllers
             _context = context;
         }
 
-        [HttpGet("albumlist")]
+        [HttpGet("list")]
         public async Task<ActionResult<List<Album>>> Get()
         {
             return await _context.Albums.ToListAsync();
         }
 
-        [HttpPost("albumsave")]
-        public async Task<ActionResult> Post(Album album) 
+        [HttpPost("save")]
+        public async Task<ActionResult> Save([FromBody] Album album)
         {
-            _context.Albums.Add(album);
-            await _context.SaveChangesAsync();
-            return Ok(album);
+            if (album == null)
+            {
+                return BadRequest("Los campos no pueden estar vacios");
+            }
+            else
+            {
+                _context.Albums.Add(album);
+                await _context.SaveChangesAsync();
+                return Ok(album);
+            }
         }
 
     }

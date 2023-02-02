@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Back_SpotiApp.Controllers
 {
+    [Route("/api/artista")]
     public class ArtistaController : Controller
     {
         private readonly DBSpotiContext _context;
@@ -14,18 +15,25 @@ namespace Back_SpotiApp.Controllers
             _context= context;
         }
 
-        [HttpGet("artistalist")]
+        [HttpGet("list")]
         public async Task<ActionResult<List<Artista>>> Get()
         {
             return await _context.Artistas.ToListAsync();
         }
 
-        [HttpPost("artistasave")]
-        public async Task<ActionResult> Post(Artista artista)
+        [HttpPost("save")]
+        public async Task<ActionResult> Save([FromBody] Artista artista)
         {
-            _context.Artistas.Add(artista);
-            await _context.SaveChangesAsync();
-            return Ok(artista);
+            if (artista == null)
+            {
+                return BadRequest("Los campos no pueden estar vacios");
+            }
+            else
+            {
+                _context.Artistas.Add(artista);
+                await _context.SaveChangesAsync();
+                return Ok(artista);
+            }
         }
     }
 }

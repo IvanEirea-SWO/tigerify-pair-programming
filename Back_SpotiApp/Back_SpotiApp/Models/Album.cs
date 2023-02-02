@@ -6,5 +6,7 @@
         public int Id { get; set; }
         public String Nombre { get; set; }
         public Artista Artista { get; set; }
+
+        public List<Cancion> Canciones { get; set; }
     }
 }

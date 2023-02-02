@@ -5,7 +5,7 @@
 namespace BackSpotiApp.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class spoti : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
