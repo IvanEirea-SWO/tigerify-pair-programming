@@ -18,7 +18,7 @@ namespace Back_SpotiApp.Controllers
         [HttpGet("list")]
         public async Task<ActionResult<List<Cancion>>> Get()
         {
-            return await _context.Canciones.ToListAsync();
+            return await _context.Canciones.Include(x=>x.Genero).ToListAsync();
         }
 
         [HttpPost("save")]
