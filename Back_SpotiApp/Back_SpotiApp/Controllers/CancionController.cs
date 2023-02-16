@@ -53,5 +53,23 @@ namespace Back_SpotiApp.Controllers
             }
             return await _context.Canciones.Include(x => x.Genero).FirstOrDefaultAsync(x => x.Nombre == name);
         }
+
+        [HttpPut("/update/{id}")]
+        public async Task<ActionResult> Put(int id, Cancion cancion)
+        {
+            _context.Entry(cancion).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return Ok(cancion);
+        }
+
+        [HttpDelete("/delete/{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var cancion = await _context.Canciones.FindAsync(id);
+            _context.Remove(cancion);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
     }
 }
