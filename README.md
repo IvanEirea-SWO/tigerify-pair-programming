@@ -1,5 +1,5 @@
 # Spoti-mock pair programming
-Music app for sharing music, little test to learn the use of React and .NET
+Music app for sharing music, little test to learn the use of Angular and .NET
 
 ## Introduction
 The Spotify-like app developed in .NET and Angular is a music streaming platform that allows users to listen to music on-demand. The platform has a wide variety of songs and music genres, which users can access through a set of endpoints for GET, POST, PUT, and DELETE requests. This wikia page will provide an overview of the app's features, architecture, and endpoints.
