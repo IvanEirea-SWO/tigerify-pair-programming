@@ -1,6 +1,8 @@
 # Spoti-mock pair programming
 Music app for sharing music, little test to learn the use of Angular and .NET
 
+Future changes for Tigerify v0.2: change the backend from .NET to Python, and maybe another technologies also.
+
 ## Introduction
 The Spotify-like app developed in .NET and Angular is a music streaming platform that allows users to listen to music on-demand. The platform has a wide variety of songs and music genres, which users can access through a set of endpoints for GET, POST, PUT, and DELETE requests. 
 
