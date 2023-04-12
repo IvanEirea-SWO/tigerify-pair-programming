@@ -1,8 +1,8 @@
 from flask import Flask
 from envs.dev.dev_env import config, get_database_config 
 from database.db import init_app
-from users.routes.genre_route import * 
-from users.routes.song_route import *
+from logic.routes.genre_route import * 
+from logic.routes.song_route import *
 from flask_cors import CORS
 
 app = Flask(__name__)

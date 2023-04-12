@@ -1,5 +1,5 @@
 from flask import Blueprint
-from users.controllers.genre_controller import *
+from logic.controllers.genre_controller import *
 
 # url comun para todos los metodos con url_prefix
 genres_routes = Blueprint('genre_routes', __name__, url_prefix='/genre')

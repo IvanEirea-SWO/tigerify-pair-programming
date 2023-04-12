@@ -1,5 +1,5 @@
 from flask import Blueprint
-from users.controllers.song_controller import *
+from logic.controllers.song_controller import *
 
 # url comun para todos los metodos con url_prefix
 songs_routes = Blueprint('song_routes', __name__, url_prefix='/song')
