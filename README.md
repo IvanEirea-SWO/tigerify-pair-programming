@@ -1,5 +1,5 @@
-# Tigerify v0.3
-Music app for sharing music, little test to learn the use of Angular and Flask
+# Tigerify v0.4
+Music app for sharing music, little test to learn the use of Angular and Flask. Now v0.4 includes an user system with basic login functionalities.
 
 ## Introduction
 Tigerify is developed in Python, using the framework Flask, and Angular, and is a music streaming platform that allows users to listen to music on-demand. The platform has a wide variety of songs and music genres, which users can access through a set of endpoints for GET, POST, PUT, and DELETE requests. 
