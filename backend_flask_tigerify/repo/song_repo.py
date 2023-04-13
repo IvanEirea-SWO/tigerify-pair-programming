@@ -12,7 +12,7 @@ def repo_get_song(id):
 
 # FIND SONG BY NAME
 def repo_get_song_by_name(name):
-    data = Song.query.filter(Song.name == name).all()
+    data = Song.query.filter(Song.name.like(f'%{name}%')).all()
     results = [] 
     for i in data:
         info = {

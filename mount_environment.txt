@@ -1,0 +1,4 @@
+# MOUNT ENVIRONMENT
+# python -m virtualenv venv
+# .\venv\Scripts\activate
+# pip install flask flask-sqlalchemy flask-marshmallow marshmallow-sqlalchemy python-dotenv flask-cors mysqlclient mysql-client pymysql flask-jwt-extended

@@ -1,0 +1,47 @@
+<!-- using ngModel & data binding (form and typescript code) -->
+<!-- two way binding maybe doesnt work well inside the form bc is waiting the submit event -->
+<select id="genre_select" [(ngModel)]="searchType" (change)="onSearchTypeChange()">
+  <option value="songs">Songs</option>
+  <option value="genres">Genres</option>
+</select>
+<input type="text" class="col-4" [(ngModel)]="searchText" (ngModelChange)="onSearch()">
+
+<div *ngIf="searchType === 'songs'">
+  <!-- songs table -->
+  <table class="table table-dark table-striped" id="songs_table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Length</th>
+        <th scope="col">Artist</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let song of data">
+        <td>{{ song.id }}</td>
+        <td>{{ song.name }}</td>
+        <td>{{ song.length }}</td>
+        <td>{{ song.artist }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="searchType === 'genres'">
+  <!-- genres table -->
+  <table class="table table-dark table-striped" id="genres_table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let genre of data">
+        <td>{{ genre.id }}</td>
+        <td>{{ genre.name }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -12,7 +12,7 @@ def repo_get_genre(id):
 
 # FIND GENRE BY NAME
 def repo_get_genre_by_name(name):
-    data = Genre.query.filter(Genre.name == name).all()
+    data = Genre.query.filter(Genre.name.like(f'%{name}%')).all()
     results = [] 
     for i in data:
         info = {
