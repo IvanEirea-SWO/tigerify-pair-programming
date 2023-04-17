@@ -1,41 +1,39 @@
-from repo.genre_repo import *
-from dao_schema.genre_schema import *
+from repo.favorite_repo import *
+from dao_schema.favorite_schema import *
 from flask import request, jsonify
 
-genre_schema = GenreSchema()
-genres_schema = GenreSchema(many=True)
+favorite_schema = FavoriteSchema()
+favorites_schema = FavoriteSchema(many=True)
 
-# LIST ALL GENRES: repo_get()
-def genres():
+# LIST ALL FAVORITES: repo_get()
+def favorites():
     data = repo_get()
-    return genres_schema.dump(data)
+    return favorites_schema.dump(data)
 
-# FIND GENRE BY ID: repo_get_genre(id)
-def genre(id):
-    return genre_schema.jsonify(repo_get_genre(id))
+# FIND FAVORITE BY ID: repo_get_favorite(id)
+def favorite(id):
+    return favorite_schema.jsonify(repo_get_favorite(id))
 
-# FIND GENRE BY NAME: repo_get_genre_by_name(name)
-def genre_by_name(name):
-    return genres_schema.jsonify(repo_get_genre_by_name(name))
-
-# SAVE GENRE: repo_save(genre)
+# SAVE FAVORITE: repo_save(favorite)
 def save():
-    name = request.json['name']
+    user_id = request.json['user_id']
+    song_id = request.json['song_id']
     
-    genre_by_request = Genre(None, name)
-    data = repo_save(genre_by_request)
-    return genre_schema.jsonify(data)
+    favorite_by_request = Favorite(None, user_id, song_id)
+    data = repo_save(favorite_by_request)
+    return favorite_schema.jsonify(data)
 
-# UPDATE GENRE: repo_put(id, genre)
+# UPDATE FAVORITE: repo_put(id, favorite)
 def put(id):
-    name = request.json['name']
+    user_id = request.json['user_id']
+    song_id = request.json['song_id']
     
-    genre_by_request = Genre(None, name)
-    repo_put(id, genre_by_request)
-    data = repo_get_genre(id) # find one element by id repo method
-    return genre_schema.jsonify(data)
+    favorite_by_request = Favorite(None, user_id, song_id)
+    repo_put(id, favorite_by_request)
+    data = repo_get_favorite(id) # find one element by id repo method
+    return favorite_schema.jsonify(data)
 
-# DELETE GENRE: repo_delete(id)
+# DELETE FAVORITE: repo_delete(id)
 def delete(id):
     repo_delete(id)
-    return jsonify({'message': 'Genre deleted'})
+    return jsonify({'message': 'Favorite deleted'})

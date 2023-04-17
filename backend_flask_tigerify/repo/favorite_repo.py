@@ -10,19 +10,6 @@ def repo_get():
 def repo_get_favorite(id):
     return Favorite.query.get(id)
 
-# FIND FAVORITE BY NAME
-def repo_get_favorite_by_name(name):
-    data = Favorite.query.filter(Favorite.name.like(f'%{name}%')).all()
-    results = [] 
-    for i in data:
-        info = {
-            'id': i.id,
-            'user_id': i.user_id,
-            'song_id': i.song_id
-        }
-        results.append(info)
-    return results
-
 # SAVE FAVORITE
 def repo_save(favorite):
     db.session.add(favorite)

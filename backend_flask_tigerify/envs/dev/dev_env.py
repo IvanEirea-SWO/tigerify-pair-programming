@@ -1,5 +1,8 @@
 import os
 from dotenv import load_dotenv
+# token
+from flask_jwt_extended import create_access_token
+import datetime
 
 '''
 En Python, os es un módulo que proporciona una manera de interactuar con el sistema operativo

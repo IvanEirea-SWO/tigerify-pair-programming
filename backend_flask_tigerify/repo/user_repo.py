@@ -10,9 +10,9 @@ def repo_get():
 def repo_get_user(id):
     return User.query.get(id)
 
-# FIND USER BY NAME
-def repo_get_user_by_name(name):
-    data = User.query.filter(User.name.like(f'%{name}%')).all()
+# FIND USER BY USERNAME
+def repo_get_user_by_name(username):
+    data = User.query.filter(User.name.like(f'%{username}%')).all()
     results = []
     for i in data:
         info = {
@@ -24,18 +24,22 @@ def repo_get_user_by_name(name):
         results.append(info)
     return results
 
-# SAVE USER
-def repo_save(user):
+# REGISTER USER
+def repo_register(user):
     db.session.add(user)
     db.session.commit()
     return user
+
+# LOGIN USER
 
 # UPDATE USER
 def repo_put(id, user):
     user_by_id = User.query.get(id)
     
     user_by_id.id = id
-    user_by_id.name = user.name
+    user_by_id.username = user.username
+    user_by_id.email = user.email
+    user_by_id.password = user.password
 
     db.session.commit()
     return user

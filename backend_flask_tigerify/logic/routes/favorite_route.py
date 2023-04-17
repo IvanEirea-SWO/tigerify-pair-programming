@@ -1,36 +1,37 @@
 from flask import Blueprint
-from logic.controllers.genre_controller import *
+from flask_jwt_extended import jwt_required
+from logic.controllers.favorite_controller import *
 
 # url comun para todos los metodos con url_prefix
-genres_routes = Blueprint('genre_routes', __name__, url_prefix='/genre')
+favorites_routes = Blueprint('favorite_routes', __name__, url_prefix='/favorite')
 
-# LIST ALL GENRES: genres()
-@genres_routes.get('/list')
-def route_genres_list():
-    return genres()
+# LIST ALL FAVORTES: favorites()
+@favorites_routes.get('/list')
+@jwt_required()
+def route_favorites_list():
+    return favorites()
 
-# FIND GENRE BY ID: genre(id)
-@genres_routes.get('/find/<int:id>')
-def route_genres_by_id(id):
-    return genre(id)
+# FIND FAVORTE BY ID: favorite(id)
+@favorites_routes.get('/find/<int:id>')
+@jwt_required()
+def route_favorites_by_id(id):
+    return favorite(id)
 
-# FIND GENRE BY NAME: genre_by_name(name)
-@genres_routes.get('/find/<string:name>')
-def route_genres_by_name(name):
-    return genre_by_name(name)
-
-# SAVE GENRE: save()
-@genres_routes.post('/save')
+# SAVE FAVORTE: save()
+@favorites_routes.post('/save')
+@jwt_required()
 def route_save():
     return save()
 
-# UPDATE GENRE: put(id)
-@genres_routes.put('/update/<int:id>')
+# UPDATE FAVORTE: put(id)
+@favorites_routes.put('/update/<int:id>')
+@jwt_required()
 def route_update(id):
     return put(id)
 
-# DELETE GENRE: delete(id)
-@genres_routes.delete('/delete/<int:id>')
+# DELETE FAVORTE: delete(id)
+@favorites_routes.delete('/delete/<int:id>')
+@jwt_required()
 def route_delete(id):
     delete(id)
-    return 'Genre deleted'
+    return jsonify({'message': 'Favorite deleted'})
